@@ -157,17 +157,10 @@ script = ExtResource("1_hfnv6")
 texture_filter = 1
 texture_repeat = 1
 sprite_frames = SubResource("SpriteFrames_460qi")
-animation = &"falling_fast"
+animation = &"falling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_btvc7")
-
-[node name="Label" type="Label" parent="."]
-offset_left = 6.0
-offset_top = 1.0
-offset_right = 46.0
-offset_bottom = 24.0
-text = "hello world"
 
 [node name="RayCast2D_Left" type="RayCast2D" parent="."]
 target_position = Vector2(-4.1, 0)
