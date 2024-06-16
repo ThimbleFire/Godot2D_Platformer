@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://h0x5mp0yr6cg"]
+
+[ext_resource type="Script" path="res://Scripts/Pushable.gd" id="1_a84l1"]
+[ext_resource type="Texture2D" uid="uid://cq2trhy5l616k" path="res://Assets/TEX_Tiles_2.png" id="1_iafyd"]
+[ext_resource type="Script" path="res://Scripts/Raycast2DCollisionEvents.gd" id="3_ux7wy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a84gm"]
+atlas = ExtResource("1_iafyd")
+region = Rect2(0, 24, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jd12q"]
+size = Vector2(16, 16)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_a84l1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_a84gm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jd12q")
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(-9.5, 0)
+script = ExtResource("3_ux7wy")
+direction = 1
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(9.5, 0)
+script = ExtResource("3_ux7wy")
+direction = 2
+
+[connection signal="on_collision" from="RayCast2D_Left" to="." method="_on_player_collision"]
+[connection signal="on_collision" from="RayCast2D_Right" to="." method="_on_player_collision"]

@@ -19,6 +19,8 @@ var is_grappling : bool = false
 var last_grapple : Direction = Direction.NONE
 var is_paused = false
 
+var lastX = 0.0
+
 func _physics_process(delta):
 	if is_paused:
 		return
@@ -90,6 +92,7 @@ func unpause():
 	is_paused = false
 
 func _on_wall_contact(direction : Direction):
+	
 	if is_on_floor():
 		return
 	
