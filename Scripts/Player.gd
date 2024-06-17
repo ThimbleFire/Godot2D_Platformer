@@ -9,6 +9,8 @@ const speed = 75.0
 const acceleration_speed = speed * 6.0
 const gravity_normal = 500
 const gravity_grappling = 50
+const jump_speed = -181.25
+const terminal_velocity = 225
 
 signal on_idle
 signal on_jump
@@ -23,16 +25,13 @@ signal on_grapple_end
 
 @onready var animator = $"AnimatedSprite2D"
 
-@export var jump_speed = -181.25
-@export var terminal_velocity = 225
-@export var gravity = 500
 
 var animation ["idle", "jumping", "falling", "falling_fast", "moving", "idle", "grappling"]
 var animation_state : AnimationState = 0
 var is_grappling : bool = false
 var last_grapple : Direction = Direction.NONE
 var is_paused = false
-var lastX = 0.0
+var gravity = 500
 var is_in_air:
 	get: return !is_on_floor() and !is_grappling
 
