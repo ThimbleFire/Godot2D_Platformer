@@ -1,0 +1,1 @@
+label.text = "Cats: $d, Dogs: $d" % [cats, dogs]
