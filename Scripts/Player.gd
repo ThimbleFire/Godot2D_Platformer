@@ -67,9 +67,9 @@ func handle_animations():
 		if !is_grappling:
 			if velocity.y < 0.0:
 				animation_state = AnimationState.JUMPING
-			if velocity.y >= terminal_velocity:
+			elif velocity.y >= terminal_velocity:
 				animation_state = AnimationState.FALLING_FAST
-			if velocity.y > 0.0:
+			else:
 				animation_state = AnimationState.FALLING
 		else:
 			animation_state = AnimationState.GRAPPLING
@@ -85,7 +85,6 @@ func StartGrappling():
 	velocity.y = 0.0
 	emit_grappling_particles()
 	gravity = gravity_grappling
-	animation_state = AnimationState.GRAPPLING
 
 func StopGrappling():
 	is_grappling = false
