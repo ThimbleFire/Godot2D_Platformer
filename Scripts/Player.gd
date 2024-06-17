@@ -3,18 +3,18 @@ class_name Player
 extends CharacterBody2D
 
 enum Direction { NONE, LEFT, RIGHT, DOWN, UP }
-enum AnimationState { IDLE, JUMPING, FALLING, FALLING_FAST, MOVING, IDLE, GRAPPLING }
+enum AnimationState { IDLE, JUMPING, FALLING, FALLING_FAST, MOVING, GRAPPLING, GET_UP }
 
 const speed = 75.0
 const acceleration_speed = speed * 6.0
 const gravity_normal = 500
 const gravity_grappling = 50
-const jump_speed = -181.25
+const jump_speed = -161.25
 const terminal_velocity = 225
 
 @onready var animator = $"AnimatedSprite2D"
 
-var animation ["idle", "jumping", "falling", "falling_fast", "moving", "idle", "grappling"]
+var animation = ["idle", "jumping", "falling", "falling_fast", "moving", "grappling", "get_up"]
 var animation_state : AnimationState = 0
 var is_grappling : bool = false
 var last_grapple : Direction = Direction.NONE
@@ -24,12 +24,11 @@ var is_in_air:
 	get: return !is_on_floor() and !is_grappling
 
 func _physics_process(delta):
-	if is_paused:
-		return
 	velocity.y = minf(terminal_velocity, velocity.y + gravity * delta)
-	handle_movement(delta)
-	handle_jump()
-	handle_animations()
+	if !is_paused:
+		handle_movement(delta)
+		handle_jump()
+		handle_animations()
 	move_and_slide()
 
 func handle_movement(delta : float):
@@ -50,7 +49,7 @@ func handle_jump():
 				emit_jump_particle()
 
 func handle_animations():
-	if !is_on_floor()
+	if !is_on_floor():
 		if !is_grappling:
 			if velocity.y < 0.0:
 				animation_state = AnimationState.JUMPING
@@ -95,18 +94,28 @@ func unpause():
 
 func _on_wall_contact(direction : Direction):	
 	if is_on_floor():
-		return	
+		return
 	# perevent grappling the same wall twice
 	if direction != last_grapple:
 		StartGrappling()
 		last_grapple = direction
 
 func _on_break_wall_contact(direction : Direction):
-	StopGrappling()
+	if is_grappling:
+		StopGrappling()
 	if velocity.y > 0:
 		delayed_grapple_jump()
 
 func _on_floor_contact(direction : Direction):
+	if animation_state == AnimationState.FALLING_FAST:
+		animation_state = AnimationState.GET_UP
+		pause()
+		animator.play(animation[animation_state])
+		velocity.y = -50.0
+		while animator.frame != 6:
+			velocity.x /= 1.5
+			await get_tree().create_timer(0.0).timeout
+		unpause()
 	if is_grappling:
 		StopGrappling()
 	last_grapple = Direction.NONE
@@ -126,7 +135,7 @@ func delayed_grapple_jump():
 	var duration : float = 0.125
 	while timer < duration:
 		timer += get_process_delta_time()
-		if Input.is_key_pressed(KEY_SPACE):
+		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_speed
 			return
 		await get_tree().create_timer(0.0).timeout 
