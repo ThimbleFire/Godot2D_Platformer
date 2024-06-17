@@ -12,19 +12,7 @@ const gravity_grappling = 50
 const jump_speed = -181.25
 const terminal_velocity = 225
 
-signal on_idle
-signal on_jump
-signal on_jump_from_ground
-signal on_jump_from_grapple
-signal on_fall
-signal on_fall_fast
-signal on_land
-signal on_land_terminal
-signal on_grapple_start
-signal on_grapple_end
-
 @onready var animator = $"AnimatedSprite2D"
-
 
 var animation ["idle", "jumping", "falling", "falling_fast", "moving", "idle", "grappling"]
 var animation_state : AnimationState = 0
