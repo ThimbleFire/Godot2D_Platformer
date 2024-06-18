@@ -5,6 +5,7 @@ https://godotshaders.com/shader/diamond-based-screen-transition/
 ## TODO:
 * [ ] Change collision mask on `Door` so that it only collides with `Player`
 * [ ] Add scene change
+  * Doors each have a value that corrospond with their exit on the specified level. Say door 3 in Level_1 leads to door 3 in Level_2. This helps us know where to place the player in the game world being loaded. 
   * [ ] Add scene change transition
 * [ ]  Add a jump effect
 * [ ]  Add a grapple effect
