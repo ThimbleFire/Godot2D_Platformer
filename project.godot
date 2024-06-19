@@ -28,6 +28,11 @@ jump={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="Layer 2"
+2d_physics/layer_3="Doors"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

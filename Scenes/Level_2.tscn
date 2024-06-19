@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cil2y8d78ph7j"]
+
+[ext_resource type="Script" path="res://Scenes/SceneController.gd" id="1_1gq3y"]
+[ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/TSET_Tiles.tres" id="2_udh26"]
+[ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/Player.tscn" id="3_r3vfk"]
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_kt5y0"]
+[ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/Door.tscn" id="5_3t1sc"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("actors")]
+script = ExtResource("1_1gq3y")
+actors = [NodePath("Player")]
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = ExtResource("2_udh26")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 458752, 0, 131072, 458752, 0, 196608, 458752, 0, 262144, 458752, 0, 327680, 458752, 0, 393216, 458752, 0, 458752, 458752, 0, 524288, 0, 1, 589824, 458752, 0, 655360, 458752, 0, 720896, 458752, 0, 786432, 458752, 0, 851968, 458752, 0, 917504, 458752, 0, 983040, 0, 2, 1, 393216, 0, 983041, 393216, 0, 2, 393216, 0, 983042, 393216, 0, 3, 393216, 0, 983043, 393216, 0, 4, 393216, 0, 983044, 393216, 0, 5, 393216, 0, 983045, 393216, 0, 6, 393216, 0, 983046, 393216, 0, 7, 393216, 0, 983047, 393216, 0, 983048, 393216, 0, 9, 393216, 0, 983049, 393216, 0, 10, 393216, 0, 983050, 393216, 0, 11, 393216, 0, 983051, 393216, 0, 12, 393216, 0, 983052, 393216, 0, 13, 393216, 0, 983053, 393216, 0, 14, 393216, 0, 983054, 393216, 0, 65551, 458752, 0, 131087, 458752, 0, 196623, 458752, 0, 262159, 458752, 0, 327695, 458752, 0, 393231, 458752, 0, 458767, 458752, 0, 524303, 458752, 0, 589839, 458752, 0, 655375, 458752, 0, 720911, 458752, 0, 983055, 131072, 2, 8, 393216, 0, 786447, 458752, 0, 851983, 458752, 0, 917519, 458752, 0, 524289, 393216, 0, 524290, 393216, 0, 524291, 393216, 0, 524292, 393216, 0, 524293, 393216, 1, 15, 131072, 0, 393218, 589824, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_r3vfk")]
+z_index = 1
+position = Vector2(32, 56)
+collision_mask = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(64, 64)
+zoom = Vector2(4, 4)
+limit_left = -256
+limit_top = -256
+limit_right = 256
+limit_bottom = 256
+script = ExtResource("4_kt5y0")
+pan_speed = 500.0
+
+[node name="Door" parent="." instance=ExtResource("5_3t1sc")]
+position = Vector2(16, 48)

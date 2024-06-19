@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b32tg771slvdt"]
+[gd_scene load_steps=7 format=3 uid="uid://b32tg771slvdt"]
 
 [ext_resource type="Script" path="res://Scenes/SceneController.gd" id="1_3am70"]
 [ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/TSET_Tiles.tres" id="1_bmrpp"]
 [ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/Player.tscn" id="2_sjpft"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_auumv"]
 [ext_resource type="PackedScene" uid="uid://h0x5mp0yr6cg" path="res://Assets/Box.tscn" id="4_s6nt2"]
+[ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/Door.tscn" id="6_nadmk"]
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("actors")]
 script = ExtResource("1_3am70")
@@ -19,7 +20,7 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 458752, 0, 131072, 458752, 
 [node name="Player" parent="." instance=ExtResource("2_sjpft")]
 z_index = 1
 position = Vector2(64, 40)
-collision_mask = 1
+collision_mask = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(64, 64)
@@ -34,3 +35,6 @@ pan_speed = 500.0
 [node name="Box" parent="." instance=ExtResource("4_s6nt2")]
 position = Vector2(80, 112)
 safe_margin = 1.0
+
+[node name="Door" parent="." instance=ExtResource("6_nadmk")]
+position = Vector2(80, 32)

@@ -3,7 +3,7 @@ https://godotshaders.com/shader/diamond-based-screen-transition/
 # Prefix
 
 ## TODO:
-* [ ] Change `Area2D` collision mask on `Door` so that it only collides with `Player`
+* [x] Change `Area2D` collision mask on `Door` so that it only collides with `Player`
 * [ ] Add scene change behaviour
   * Each `Door` has an id that corrosponds with its exit on its destination level _(Door with id 3 in Level_1 leads to door with id 3 in Level_2)_
   * [ ] Add scene change transition
