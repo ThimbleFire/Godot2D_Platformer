@@ -39,7 +39,8 @@ func update(delta):
 		handle_jump()
 		handle_animations()
 		move_and_slide()
-
+		handle_interact()
+	
 func handle_movement(delta : float, direction : float = 0.0):
 	velocity.x = move_toward(velocity.x, direction * speed, acceleration_speed * delta)
 	if not is_zero_approx(velocity.x):
@@ -50,6 +51,8 @@ func handle_jump(no_grapple_exception : bool = false):
 	velocity.y = jump_speed
 	if is_on_floor():
 		emit_jump_particle()
+func handle_interact():
+	pass
 
 func handle_animations():
 	if !is_on_floor():

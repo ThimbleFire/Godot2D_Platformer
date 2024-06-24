@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cil2y8d78ph7j"]
+[gd_scene load_steps=7 format=3 uid="uid://cil2y8d78ph7j"]
 
-[ext_resource type="Script" path="res://Scenes/SceneController.gd" id="1_1gq3y"]
+[ext_resource type="Script" path="res://Scripts/SceneController.gd" id="1_1gq3y"]
+[ext_resource type="PackedScene" uid="uid://oufb5g3jcn5k" path="res://Assets/ScreenController.tscn" id="2_5egs0"]
 [ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/TSET_Tiles.tres" id="2_udh26"]
 [ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/Player.tscn" id="3_r3vfk"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_kt5y0"]
@@ -10,6 +11,8 @@
 script = ExtResource("1_1gq3y")
 actors = [NodePath("Player")]
 
+[node name="CanvasLayer" parent="." instance=ExtResource("2_5egs0")]
+
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = ExtResource("2_udh26")
@@ -18,7 +21,7 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 458752, 0, 131072, 458752, 
 
 [node name="Player" parent="." instance=ExtResource("3_r3vfk")]
 z_index = 1
-position = Vector2(32, 56)
+position = Vector2(29, 60)
 collision_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -33,3 +36,4 @@ pan_speed = 500.0
 
 [node name="Door" parent="." instance=ExtResource("5_3t1sc")]
 position = Vector2(16, 48)
+filename = "res://Scenes/Level_1.tscn"

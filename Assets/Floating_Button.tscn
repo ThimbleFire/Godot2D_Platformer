@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4ntd8o64utw8"]
+
+[ext_resource type="Texture2D" uid="uid://cengrpf3kas1g" path="res://Assets/TEX_button_test.png" id="1_2nxgu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etfox"]
+atlas = ExtResource("1_2nxgu")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkhgh"]
+atlas = ExtResource("1_2nxgu")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_catlh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etfox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkhgh")
+}],
+"loop": true,
+"name": &"take_a_hint",
+"speed": 2.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+texture_filter = 1
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_catlh")
+animation = &"take_a_hint"
