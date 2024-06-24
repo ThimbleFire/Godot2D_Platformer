@@ -6,9 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_kt5y0"]
 [ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/Door.tscn" id="5_3t1sc"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("actors")]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_1gq3y")
-actors = [NodePath("Player")]
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

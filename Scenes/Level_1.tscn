@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://h0x5mp0yr6cg" path="res://Assets/Box.tscn" id="4_s6nt2"]
 [ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/Door.tscn" id="6_nadmk"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("actors")]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_3am70")
-actors = [NodePath("Player")]
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

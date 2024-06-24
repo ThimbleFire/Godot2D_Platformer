@@ -32,6 +32,7 @@ var is_falling:
 var is_falling_terminal:
 	get: return velocity.y >= terminal_velocity or animation_state == AnimationState.FALLING_FAST
 
+#Node: `update` is called by SceneController. Actors must be flagged as such to move.
 func update(delta):
 	velocity.y = minf(terminal_velocity, velocity.y + gravity * delta)
 	if enabled:
