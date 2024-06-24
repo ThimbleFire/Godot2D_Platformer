@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bapg8aoht8fb4"]
 
-[ext_resource type="Shader" path="res://Scripts/Shaders/screen_transition_pan_in.gdshader" id="1_nqvsd"]
+[ext_resource type="Shader" path="res://Assets/Screen Transition/Shaders/screen_transition_pan_in.gdshader" id="1_nqvsd"]
 
 [resource]
 shader = ExtResource("1_nqvsd")

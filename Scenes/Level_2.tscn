@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cil2y8d78ph7j"]
 
 [ext_resource type="Script" path="res://Scripts/SceneController.gd" id="1_1gq3y"]
-[ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/TSET_Tiles.tres" id="2_udh26"]
-[ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/Player.tscn" id="3_r3vfk"]
+[ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/Tiles/TSET_Tiles.tres" id="2_udh26"]
+[ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/SceneObjects/Player/Player.tscn" id="3_r3vfk"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_kt5y0"]
-[ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/Door.tscn" id="5_3t1sc"]
+[ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/SceneObjects/Door.tscn" id="5_3t1sc"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_1gq3y")

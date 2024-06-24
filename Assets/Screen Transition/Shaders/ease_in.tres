@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d3qweyqd0gc1r"]
 
-[ext_resource type="Shader" path="res://Scripts/Shaders/screen_transition_pan_in.gdshader" id="1_tii5k"]
+[ext_resource type="Shader" path="res://Assets/Screen Transition/Shaders/screen_transition_pan_in.gdshader" id="1_tii5k"]
 
 [resource]
 shader = ExtResource("1_tii5k")

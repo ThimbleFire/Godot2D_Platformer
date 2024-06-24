@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://oufb5g3jcn5k"]
+
+[ext_resource type="Material" uid="uid://bapg8aoht8fb4" path="res://Assets/Screen Transition/Shaders/ease_out.tres" id="1_5kfda"]
+[ext_resource type="Script" path="res://Assets/Screen Transition/ease_in_out.gd" id="2_khc7n"]
+
+[node name="ScreenTransition" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("1_5kfda")
+offset_right = 512.0
+offset_bottom = 512.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_khc7n")

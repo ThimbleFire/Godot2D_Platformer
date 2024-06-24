@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://1uieopxtx3gc"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_hfnv6"]
-[ext_resource type="Texture2D" uid="uid://bceicpvv85gby" path="res://Assets/TEX_Character.png" id="1_l7um5"]
+[ext_resource type="Texture2D" uid="uid://bceicpvv85gby" path="res://Assets/SceneObjects/Player/TEX_Character.png" id="1_l7um5"]
+[ext_resource type="Script" path="res://Assets/SceneObjects/Player/Player.gd" id="1_xptsk"]
 [ext_resource type="Script" path="res://Scripts/Raycast2DCollisionEvents.gd" id="3_flak8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sbxgc"]
@@ -160,7 +160,7 @@ size = Vector2(8, 8)
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Actor"]]
 collision_layer = 5
 collision_mask = 2147483649
-script = ExtResource("1_hfnv6")
+script = ExtResource("1_xptsk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

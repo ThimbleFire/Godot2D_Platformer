@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://b32tg771slvdt"]
 
 [ext_resource type="Script" path="res://Scripts/SceneController.gd" id="1_3am70"]
-[ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/TSET_Tiles.tres" id="1_bmrpp"]
-[ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/Player.tscn" id="2_sjpft"]
+[ext_resource type="TileSet" uid="uid://cb6w7mv4tm8li" path="res://Assets/Tiles/TSET_Tiles.tres" id="1_bmrpp"]
+[ext_resource type="PackedScene" uid="uid://1uieopxtx3gc" path="res://Assets/SceneObjects/Player/Player.tscn" id="2_sjpft"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_auumv"]
-[ext_resource type="PackedScene" uid="uid://h0x5mp0yr6cg" path="res://Assets/Box.tscn" id="4_s6nt2"]
-[ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/Door.tscn" id="6_nadmk"]
+[ext_resource type="PackedScene" uid="uid://h0x5mp0yr6cg" path="res://Assets/SceneObjects/Box.tscn" id="4_s6nt2"]
+[ext_resource type="PackedScene" uid="uid://3146rach6uhm" path="res://Assets/SceneObjects/Door.tscn" id="6_nadmk"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_3am70")

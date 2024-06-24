@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://h0x5mp0yr6cg"]
 
 [ext_resource type="Script" path="res://Scripts/Pushable.gd" id="1_a84l1"]
-[ext_resource type="Texture2D" uid="uid://cq2trhy5l616k" path="res://Assets/TEX_Tiles_2.png" id="1_iafyd"]
+[ext_resource type="Texture2D" uid="uid://cq2trhy5l616k" path="res://Assets/Tiles/TEX_Tiles_2.png" id="1_iafyd"]
 [ext_resource type="Script" path="res://Scripts/Raycast2DCollisionEvents.gd" id="3_ux7wy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a84gm"]

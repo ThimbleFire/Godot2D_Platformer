@@ -14,6 +14,9 @@ const terminal_velocity = 250
 
 @onready var animator = $"AnimatedSprite2D"
 
+var p_jump = preload("res://Assets/SceneObjects/Player/Effects/jump_effect.tscn")
+var p_grapple = preload("res://Assets/SceneObjects/Player/Effects/grapple_effect.tscn")
+
 var animation = ["idle", "jumping", "falling", "falling_fast", "moving", "grappling", "get_up"]
 var animation_state : AnimationState = 0
 var is_grappling : bool = false
@@ -84,9 +87,16 @@ func StopGrappling():
 
 func emit_grappling_particles():
 	while is_grappling:
+		var effect = p_grapple.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE) as AnimatedSprite2D
+		get_tree().root.add_child(effect)
+		effect.position = position
+		effect.scale.x = -animator.scale.x
 		await get_tree().create_timer(0.33).timeout
 func emit_jump_particle():
-	pass
+	var effect = p_jump.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE) as AnimatedSprite2D
+	get_tree().root.add_child(effect)
+	effect.position = position
+	
 func emit_head_bump_particle():
 	pass
 

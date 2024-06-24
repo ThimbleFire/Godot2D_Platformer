@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2trhy5l616k"
-path="res://.godot/imported/TEX_Tiles_2.png-6e45b781efff7266b87059345445b01f.ctex"
+uid="uid://bceicpvv85gby"
+path="res://.godot/imported/TEX_Character.png-1f240a96519d9a61a38c6e72a7a92ace.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TEX_Tiles_2.png"
-dest_files=["res://.godot/imported/TEX_Tiles_2.png-6e45b781efff7266b87059345445b01f.ctex"]
+source_file="res://Assets/SceneObjects/Player/TEX_Character.png"
+dest_files=["res://.godot/imported/TEX_Character.png-1f240a96519d9a61a38c6e72a7a92ace.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
