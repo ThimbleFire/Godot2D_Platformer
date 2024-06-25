@@ -2,7 +2,8 @@
 
 ## TODO List:
 * ❌ Scale UI with resolution
-* ❌ Add player sound effects
+* ❌ Add UI sound effects
+* ❌ Add player character sound effects
 * ❌ Change up the world to something more like Fez
 * ❌ Add slow camera tracking
 * ❌ Add impactful camera zoom transitions
