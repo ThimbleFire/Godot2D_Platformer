@@ -1,13 +1,15 @@
-https://godotshaders.com/shader/diamond-based-screen-transition/
-
 # Prefix
 
 ## TODO:
-* [ ] Add scene change behaviour
+* [x] Add scene change behaviour
   * Each `Door` has an id that corrosponds with its exit on its destination level _(Door with id 3 in Level_1 leads to door with id 3 in Level_2)_
-  * [ ] Add scene change transition
-* [ ]  Add a jump effect
-* [ ]  Add a grapple effect
+  * [x] Add scene change transition
+* [x]  Add a jump effect
+* [x]  Add a grapple effect
+* [x]  Save and load game configuration on exit & load
+* [x]  Add a pause menu
+* [x]  Add a settings menu for changing resolution
+  * [x]  Get it so the menu changes the resolution
 * [ ]  Add player sound effects
 * [ ]  Change up the world to something more like Fez
 * [ ]  Add slow camera tracking
