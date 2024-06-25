@@ -1,0 +1,209 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx4ovb5wlyiko"]
+
+[ext_resource type="Shader" path="res://Assets/Windows/PauseMenu.gdshader" id="1_bv82p"]
+[ext_resource type="Script" path="res://Assets/Windows/PauseMenu.gd" id="1_olnht"]
+[ext_resource type="FontFile" uid="uid://booi5gv1eugje" path="res://Assets/Windows/upheavtt.ttf" id="3_q6xcd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mh8ee"]
+shader = ExtResource("1_bv82p")
+shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ha3s0"]
+content_margin_left = 90.0
+content_margin_top = 0.0
+content_margin_right = 90.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chpru"]
+content_margin_left = 90.0
+content_margin_right = 90.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_diq3e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qbjjy"]
+resource_name = "menu_foreground_blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ke8s"]
+_data = {
+"RESET": SubResource("Animation_diq3e"),
+"menu_foreground_blur": SubResource("Animation_qbjjy")
+}
+
+[node name="Panel" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_olnht")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mh8ee")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="VBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 17
+alignment = 1
+
+[node name="Box" type="PanelContainer" parent="PanelContainer/Main"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha3s0")
+
+[node name="Label1" type="Label" parent="PanelContainer/Main/Box"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "RESUME"
+
+[node name="Label2" type="Label" parent="PanelContainer/Main"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "SETTINGS"
+
+[node name="Label3" type="Label" parent="PanelContainer/Main"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "EXIT GAME"
+
+[node name="Settings" type="VBoxContainer" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 9
+alignment = 1
+
+[node name="Box" type="PanelContainer" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_chpru")
+
+[node name="Label" type="Label" parent="PanelContainer/Settings/Box"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "RESOLUTION: 1920 x 1080"
+
+[node name="Label2" type="Label" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "SCREEN MODE: FULLSCREEN WINDOW"
+
+[node name="btn_reset_defaults" type="Button" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "RESET TO DEFAULT"
+
+[node name="btn_back2" type="Button" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "Back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8ke8s")
+}
+
+[connection signal="button_down" from="PanelContainer/Settings/btn_reset_defaults" to="." method="_on_quit_pressed"]
+[connection signal="button_down" from="PanelContainer/Settings/btn_back2" to="." method="_on_quit_pressed"]

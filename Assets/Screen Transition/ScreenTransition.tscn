@@ -9,5 +9,5 @@
 material = ExtResource("1_5kfda")
 offset_right = 512.0
 offset_bottom = 512.0
-color = Color(0, 0, 0, 1)
+color = Color(0.172549, 0.054902, 0.203922, 1)
 script = ExtResource("2_khc7n")

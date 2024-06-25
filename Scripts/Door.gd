@@ -3,7 +3,6 @@ extends Node2D
 @export var filename : String
 @onready var player : Player = $"../Player"
 @onready var scene_controller : SceneController = $".."
-#@onready var screen_transition : ScreenTransition = $"../CanvasLayer/ColorRect"
 
 var enabled : bool = true
 

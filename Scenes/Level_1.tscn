@@ -27,14 +27,12 @@ safe_margin = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(64, 64)
-zoom = Vector2(4, 4)
-limit_left = -256
-limit_top = -256
-limit_right = 256
-limit_bottom = 256
+zoom = Vector2(6, 6)
 script = ExtResource("3_auumv")
 pan_speed = 500.0
 
 [node name="Door" parent="." instance=ExtResource("6_nadmk")]
-position = Vector2(80, 32)
+position = Vector2(224, 40)
 filename = "res://Scenes/Level_2.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -10,6 +10,7 @@ func ease_in(event):
 	screen_controller = canvas_object.instantiate()
 	add_child(screen_controller)
 	var canvas = screen_controller.get_child(0) as ColorRect
+	canvas.size = DisplayServer.window_get_size()
 	canvas.ease_in(_on_eased_in)
 
 func ease_out(event):
@@ -17,6 +18,7 @@ func ease_out(event):
 	screen_controller = canvas_object.instantiate()
 	add_child(screen_controller)
 	var canvas = screen_controller.get_child(0) as ColorRect
+	canvas.size = DisplayServer.window_get_size()
 	canvas.ease_out(_on_eased_out)
 
 func _on_eased_in():
