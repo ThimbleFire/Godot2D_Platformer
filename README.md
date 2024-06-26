@@ -2,10 +2,12 @@
 
 ## TODO code changes:
 * `Prefix/Scripts/SceneController.gd::config_load` Don't load borderless, just set it to true if Resolution is 6
-* `Prefix/Scripts/SceneController.gd::config_save` Don't use Camera.zoom.x to determine resolution index. _To resolve scaling UI we may have to change the way we use the cameras zoom property._
-* Maybe reconsider modifying `Prefix/Assets/Windows/PauseMenu.gd` so its applicable to all menus and not just the pause menu. This would instantiating a separate `Settings` menu and removing `PauseMenu`. We could create a class for labels that give them customizable behaviour upon tapping the `left`, `right`, and `interact` keys.  
+* `Prefix/Scripts/SceneController.gd::config_save` Don't use `Camera.zoom.x` to determine resolution index.
+* Modify `Prefix/Assets/Windows/PauseMenu.gd` so its applicable to all menus and not just the pause menu.
+* Have `PauseMenu.tscn` instantiate `SettingsMenu.tscn` and delete itself. Then on back have `SettingsMenu` instantiate `Pausemenu`.
 
 ## TODO List:
+* ❌ Save changes to settings immediately because configuration is loaded every time a scene is loaded and currently we're only saving when exiting the game
 * ❌ Scale UI with resolution
 * ❌ Add UI sound effects
 * ❌ Add player character sound effects
