@@ -11,14 +11,17 @@ const RESOLUTIONS : Array[Vector2i] = [
 	Vector2i(1280,720), 
 	Vector2i(1600,900), 
 	Vector2i(1920,1080)]
-const RESOLUTIONS_STR : Array[String] = [
-	"320x180",
-	"640x360",
-	"960x540",
-	"1280x720",
-	"1600x900",
-	"1920x1080" ]
 const CONFIGURATION_PATH : String = "user://configuration.cfg"
+
+func increase_resolution():
+	var i : int = RESOLUTIONS.find(get_window().size)
+	if i + 1 < RESOLUTIONS.size - 1:
+		get_window().size = RESOLUTIONS(i + 1)
+
+func decrease_resolution():
+	var i : int = RESOLUTIONS.find(get_window().size)
+	if i > 0:
+		get_window().size = RESOLUTIONS(i - 1)
 
 var config : ConfigFile
 
