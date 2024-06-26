@@ -21,6 +21,7 @@ func increase_resolution():
 func decrease_resolution():
 	var i : int = RESOLUTIONS.find(get_window().size)
 	if i > 0:
+		get_window().borderless = false
 		get_window().size = RESOLUTIONS(i - 1)
 
 var current_resolution_str:
