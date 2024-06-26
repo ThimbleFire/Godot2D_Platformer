@@ -11,19 +11,7 @@
 * ❌ Scale UI with resolution
 * ❌ Add UI sound effects
 * ❌ Add player character sound effects
-* ❌ Change up the world to something more like Fez
-* ❌ Add slow camera tracking
-* ❌ Add impactful camera zoom transitions
-* ❌ Add an NPC
-* ❌ Make the NPC move around slowly occasionally
-* ❌ Create a dialog system (oh boy, here we go...)
-* ❌ Make the NPC talk-to-able while they're idle
-  * Add a little speech bubble pop-up overhead when they can be talked to
-  * If the NPC has any unspoken dialog, make the icon yellow, else gray
-* ❌ Add a sound effect for the dialog while each character is being added to the dialog box
-* ❌ Have the NPC give the player an item that enhances their ability to navigate the game world
-  * The player should be limited to the number of items they can carry, this means at any one-point in time they won't be able to explore the whole world - they'll need to carefully decide which NPCs to exchange items with.
-  * Once the player loses an item they can no longer get it back.
+* ❌ 
 
 ## Complete List:
 * ✔ Add scene change behaviour
