@@ -174,20 +174,26 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_chpru")
 
-[node name="lbl_fullscreen2" type="Label" parent="PanelContainer/Settings/Box"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
-text = "SCREEN MODE: FULLSCREEN"
-
-[node name="lbl_resolution" type="Label" parent="PanelContainer/Settings"]
+[node name="lbl_resolution" type="Label" parent="PanelContainer/Settings/Box"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
 theme_override_font_sizes/font_size = 60
 text = "RESOLUTION: 1920 x 1080"
-metadata/Enabled = true
+
+[node name="lbl_border" type="Label" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "BORDER: BORDERLESS"
+
+[node name="lbl_fullscreen2" type="Label" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "SCREEN MODE: FULLSCREEN WINDOW"
 
 [node name="btn_reset_defaults" type="Button" parent="PanelContainer/Settings"]
 layout_mode = 2

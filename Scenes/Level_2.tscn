@@ -33,3 +33,5 @@ pan_speed = 500.0
 [node name="Door" parent="." instance=ExtResource("5_3t1sc")]
 position = Vector2(16, 48)
 filename = "res://Scenes/Level_1.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

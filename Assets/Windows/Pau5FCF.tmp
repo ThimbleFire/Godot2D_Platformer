@@ -189,6 +189,15 @@ theme_override_font_sizes/font_size = 60
 text = "RESOLUTION: 1920 x 1080"
 metadata/Enabled = true
 
+[node name="lbl_border" type="Label" parent="PanelContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_q6xcd")
+theme_override_font_sizes/font_size = 60
+text = "BORDER: BORDERLESS"
+metadata/enabled = true
+
 [node name="btn_reset_defaults" type="Button" parent="PanelContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 4
