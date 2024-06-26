@@ -13,7 +13,7 @@ func next():
         index += 1
         text = options[index]
 
-fund back():
+func back():
     if index > 0:
         index -= 1
         text = options[index]
