@@ -9,10 +9,10 @@ shader = ExtResource("1_bv82p")
 shader_parameter/lod = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ha3s0"]
-content_margin_left = 90.0
-content_margin_top = 0.0
-content_margin_right = 90.0
-content_margin_bottom = 0.0
+content_margin_left = 10.0
+content_margin_top = 1.0
+content_margin_right = 10.0
+content_margin_bottom = 1.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 1
 border_width_top = 1
@@ -22,8 +22,10 @@ border_color = Color(1, 1, 1, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chpru"]
-content_margin_left = 90.0
-content_margin_right = 90.0
+content_margin_left = 10.0
+content_margin_top = 1.0
+content_margin_right = 10.0
+content_margin_bottom = 1.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 1
 border_width_top = 1
@@ -120,16 +122,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 82.0
-offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Main" type="VBoxContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_constants/separation = 17
 alignment = 1
 
@@ -143,21 +142,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ha3s0")
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "RESUME"
 
 [node name="lbl_settings" type="Label" parent="PanelContainer/Main"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "SETTINGS"
 
 [node name="lbl_quit" type="Label" parent="PanelContainer/Main"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "EXIT GAME"
 
 [node name="Settings" type="VBoxContainer" parent="PanelContainer"]
@@ -178,14 +177,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_chpru")
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "SCREEN MODE: FULLSCREEN"
 
 [node name="lbl_resolution" type="Label" parent="PanelContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "RESOLUTION: 1920 x 1080"
 metadata/Enabled = true
 
@@ -194,7 +193,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "RESET TO DEFAULT"
 
 [node name="btn_back" type="Button" parent="PanelContainer/Settings"]
@@ -202,7 +201,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_q6xcd")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 16
 text = "Back"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

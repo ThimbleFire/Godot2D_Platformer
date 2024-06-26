@@ -5,7 +5,7 @@ extends CharacterBody2D
 func _on_player_collision(direction):
 	velocity.x = move_toward(velocity.x, (1.0 if direction == 1 else -1.0) * 75.0, 450 * get_process_delta_time())
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity_decay()
 	move_and_slide()
 	

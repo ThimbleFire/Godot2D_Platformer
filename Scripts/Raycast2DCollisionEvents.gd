@@ -9,7 +9,7 @@ signal on_collision(direction)
 var colliding = false
 @export var direction : Player.Direction
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if is_colliding() and !colliding:
 		colliding = true
 		emit_signal("on_collision_start", direction)

@@ -15,7 +15,7 @@ func _ready():
 	for actor in get_tree().get_nodes_in_group("Actor"):
 		actors.append(actor)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("Escape"):
 		if get_tree().paused == false:
 			menu_instance = pause_menu.instantiate()

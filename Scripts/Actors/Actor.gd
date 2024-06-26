@@ -18,7 +18,7 @@ var p_jump = preload("res://Assets/SceneObjects/Player/Effects/jump_effect.tscn"
 var p_grapple = preload("res://Assets/SceneObjects/Player/Effects/grapple_effect.tscn")
 
 var animation = ["idle", "jumping", "falling", "falling_fast", "moving", "grappling", "get_up"]
-var animation_state : AnimationState = 0
+var animation_state : AnimationState = AnimationState.IDLE
 var is_grappling : bool = false
 var last_grapple : Direction = Direction.NONE
 var gravity = 500
@@ -50,7 +50,7 @@ func handle_movement(delta : float, direction : float = 0.0):
 	if not is_zero_approx(velocity.x):
 		if velocity.x > 0.0: animator.scale.x = 1.0
 		else: 				 animator.scale.x = -1.0
-func handle_jump(no_grapple_exception : bool = false):
+func handle_jump(_no_grapple_exception : bool = false):
 	StopGrappling()
 	velocity.y = jump_speed
 	if is_on_floor():
@@ -110,23 +110,23 @@ func _on_wall_contact(direction : Direction):
 	if direction != last_grapple:
 		StartGrappling()
 		last_grapple = direction
-func _on_break_wall_contact(direction : Direction):
+func _on_break_wall_contact(_direction : Direction):
 	if is_grappling:
 		StopGrappling()
 	if is_falling:
 		delayed_grapple_jump()
-func _on_floor_contact(direction : Direction):
+func _on_floor_contact(_direction : Direction):
 	if is_falling_terminal:
 		terminal_floor_bounce()
 	if is_grappling:
 		StopGrappling()
 	last_grapple = Direction.NONE
-func _on_break_floor_contact(direction : Direction):
+func _on_break_floor_contact(_direction : Direction):
 	pass
-func _on_ceiling_contact(direction : Direction):
+func _on_ceiling_contact(_direction : Direction):
 	emit_head_bump_particle()
 	pass
-func _on_break_ceiling_contact(direction : Direction):
+func _on_break_ceiling_contact(_direction : Direction):
 	pass
 
 func delayed_grapple_jump():
@@ -139,12 +139,12 @@ func delayed_grapple_jump():
 		await get_tree().create_timer(0.0).timeout 
 
 func terminal_floor_bounce():
-	var terminal_floor_bounce = -50
+	var bounce = -50
 	var decayrate : float = 1.05
 	set_active(false)
 	animation_state = AnimationState.GET_UP
 	animator.play(animation[animation_state])
-	velocity.y = terminal_floor_bounce
+	velocity.y = bounce
 	while animator.frame != 6:
 		velocity.x /= decayrate
 		move_and_slide()

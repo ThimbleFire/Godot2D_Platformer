@@ -28,7 +28,7 @@ func _ready():
 			enable_label(label, "SCREEN MODE: WINDOWED") 
 			enable_label(settings.get_child(1), "RESOLUTION: " + GConfig.RESOLUTIONS_STR[resolution_index])
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("Escape"):
 		if get_tree().paused == true and !animation_player.is_playing():
 			if main.visible == true:
@@ -65,7 +65,7 @@ func handle_main():
 		match menu_index:
 			0: close()
 			1: 
-				active_page = 1
+				active_page = Page.SETTINGS
 				main.visible = false
 				settings.visible = true
 			2: quit()
@@ -91,6 +91,7 @@ func handle_settings():
 			
 	if Input.is_action_just_pressed("Interact"):
 		match settings_index:
+			2: reset_configuration()
 			3: close_settings()
 		
 	if Input.is_action_just_pressed("right"):
@@ -110,7 +111,7 @@ func close():
 	self.queue_free()
 func close_settings():
 	GameConfiguration.gcsave()
-	active_page = 0
+	active_page = Page.MAIN
 	main.visible = true
 	settings.visible = false
 
@@ -183,4 +184,18 @@ func enable_label(label : Label, state : String = ""):
 	label.set_meta("Enabled", true)
 	if state != "":
 		label.text = state
+	pass
+
+func reset_configuration():
+	resolution_index = 3
+	get_window().borderless = false
+	get_window().mode = Window.MODE_WINDOWED
+	enable_label(settings.get_child(0), "SCREEN MODE: WINDOWED")
+	get_window().size = Vector2i(GConfig.WINDOW_WIDTH_SIZE_1 * (resolution_index+1), GConfig.WINDOW_HEIGHT_SIZE_1 * (resolution_index+1))
+	enable_label(settings.get_child(1), "RESOLUTION: " + GConfig.RESOLUTIONS_STR[resolution_index])
+	GameConfiguration.set_value("Resolution", get_window().size)
+	GameConfiguration.set_value("Borderless", get_window().borderless)
+	GameConfiguration.set_value("WindowMode", get_window().mode)
+
+	
 	pass
