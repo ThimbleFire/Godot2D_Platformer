@@ -23,6 +23,9 @@ func decrease_resolution():
 	if i > 0:
 		get_window().size = RESOLUTIONS(i - 1)
 
+var current_resolution_str:
+	get: return str(get_window().size).trim_prefix("{").trim_suffix("}")
+
 var config : ConfigFile
 
 func _ready():
