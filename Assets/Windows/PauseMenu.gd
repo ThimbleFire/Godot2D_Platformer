@@ -11,21 +11,19 @@ var active_page : Page = Page.MAIN
 
 var menu_index = 0
 var settings_index = 0
-var resolution_index = 5
 var windowed_res_ref = Vector2i(1920,1080)
 
 func _ready():
 	get_tree().paused = true
 	animation_player.play("menu_foreground_blur")
-	resolution_index = GConfig.RESOLUTIONS.find(GameConfiguration.get_value("Resolution"))
 	var label : Label = settings_container.get_child(0)
 	match GameConfiguration.get_value("WindowMode"):
 		Window.MODE_EXCLUSIVE_FULLSCREEN:
 			enable_label(label, "SCREEN MODE: FULLSCREEN") 
-			disable_label(settings.get_child(1), "RESOLUTION: " + str(GConfig.RESOLUTIONS[resolution_index]).trim_prefix("{").trim_suffix("}"))
+			disable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
 		Window.MODE_WINDOWED:
 			enable_label(label, "SCREEN MODE: WINDOWED") 
-			enable_label(settings.get_child(1), "RESOLUTION: " + str(GConfig.RESOLUTIONS[resolution_index]).trim_prefix("{").trim_suffix("}"))
+			enable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("Escape"):
@@ -42,9 +40,9 @@ func _process(_delta):
 			handle_settings()
 
 func handle_main():
+	var child = main_container.get_child(0)
 	if Input.is_action_just_pressed("Down"):
 		if menu_index < main.get_child_count() - 1:
-			var child = main_container.get_child(0)
 			child.reparent(main)
 			main.move_child(child, menu_index)
 			menu_index += 1
@@ -53,7 +51,6 @@ func handle_main():
 			
 	if Input.is_action_just_pressed("Up"):
 		if menu_index > 0:
-			var child = main_container.get_child(0)
 			child.reparent(main)
 			main.move_child(child, main_container.get_index() + 1)
 			menu_index -= 1
@@ -62,17 +59,23 @@ func handle_main():
 			
 	if Input.is_action_just_pressed("Interact"):
 		match menu_index:
-			0: close()
+			0: close_main()
 			1: 
 				active_page = Page.SETTINGS
 				main.visible = false
 				settings.visible = true
 			2: quit()
-			
+
+func close_main():
+	animation_player.play_backwards("menu_foreground_blur")
+	await animation_player.animation_finished
+	get_tree().paused = false
+	self.queue_free()
+
 func handle_settings():
+	var child = settings_container.get_child(0)
 	if Input.is_action_just_pressed("Down"):
 		if settings_index < settings.get_child_count() - 1:
-			var child = settings_container.get_child(0)
 			child.reparent(settings)
 			settings.move_child(child, settings_index)
 			settings_index += 1
@@ -81,7 +84,6 @@ func handle_settings():
 			
 	if Input.is_action_just_pressed("Up"):
 		if settings_index > 0:
-			var child = settings_container.get_child(0)
 			child.reparent(settings)
 			settings.move_child(child, settings_container.get_index() + 1)
 			settings_index -= 1
@@ -95,19 +97,14 @@ func handle_settings():
 		
 	if Input.is_action_just_pressed("right"):
 		match settings_index:
-			0: _on_fullscreen_increase()
-			1: _on_resolution_increase()
+			0: _on_fullscreen_increase(child)
+			1: _on_resolution_increase(child)
 		
 	if Input.is_action_just_pressed("left"):
 		match settings_index:
-			0: _on_fullscreen_decrease()
-			1: _on_resolution_decrease()
+			0: _on_fullscreen_decrease(child)
+			1: _on_resolution_decrease(child)
 
-func close():
-	animation_player.play_backwards("menu_foreground_blur")
-	await animation_player.animation_finished
-	get_tree().paused = false
-	self.queue_free()
 func close_settings():
 	GameConfiguration.gcsave()
 	active_page = Page.MAIN
@@ -117,57 +114,47 @@ func close_settings():
 func quit():
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	
-func _on_resolution_increase():
+func _on_resolution_increase(child : Label):
 	var enabled : bool = settings_container.get_child(0).get_meta("Enabled")
 	if enabled:
-		if resolution_index < 5:
-			resolution_index += 1
-			var label : Label = settings_container.get_child(0)
-			label.text = "RESOLUTION: " + str(GConfig.RESOLUTIONS[resolution_index]).trim_prefix("{").trim_suffix("}")
-			get_window().size = Vector2i(GConfig.WINDOW_WIDTH_SIZE_1 * (resolution_index+1), GConfig.WINDOW_HEIGHT_SIZE_1 * (resolution_index+1))
-			GameConfiguration.set_value("Resolution", get_window().size)
-func _on_resolution_decrease():
-	var enabled : bool = settings_container.get_child(0).get_meta("Enabled")
-	if enabled:
-		if resolution_index > 0:
-			resolution_index -= 1
-			var label : Label = settings_container.get_child(0)
-			label.text = "RESOLUTION: " + str(GConfig.RESOLUTIONS[resolution_index]).trim_prefix("{").trim_suffix("}")
-			await get_tree().create_timer(0.05).timeout
-			get_window().borderless = false
-			await get_tree().create_timer(0.05).timeout
-			get_window().size = Vector2i(GConfig.WINDOW_WIDTH_SIZE_1 * (resolution_index+1), GConfig.WINDOW_HEIGHT_SIZE_1 * (resolution_index+1))
-			GameConfiguration.set_value("Resolution", get_window().size)
-			GameConfiguration.set_value("Borderless", get_window().borderless)
+		GameConfiguration.increase_resolution()
+		child.text = "RESOLUTION: " + GameConfiguration.current_resolution_str
+		GameConfiguration.set_value("Resolution", get_window().size)
 
-func _on_fullscreen_increase():
-	var label : Label = settings_container.get_child(0)
+func _on_resolution_decrease(child : Label):
+	var enabled : bool = settings_container.get_child(0).get_meta("Enabled")
+	if enabled:
+		await get_tree().create_timer(0.05).timeout
+		GameConfiguration.decrease_resolution()
+		child.text = "RESOLUTION: " + GameConfiguration.current_resolution_str
+		GameConfiguration.set_value("Resolution", get_window().size)
+		GameConfiguration.set_value("Borderless", get_window().borderless)
+
+func _on_fullscreen_increase(child : Label):
 	match get_window().mode:
 		Window.MODE_WINDOWED:
 			windowed_res_ref = get_window().size
 			get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
-			label.text = "SCREEN MODE: FULLSCREEN"
+			child.text = "SCREEN MODE: FULLSCREEN"
 			get_window().borderless = true
 			disable_label(settings.get_child(1), "RESOLUTION: 1920 x 1080")
 			await get_tree().create_timer(0.05).timeout
 			GameConfiguration.set_value("Resolution", get_window().size)
 			GameConfiguration.set_value("Borderless", get_window().borderless)
 			GameConfiguration.set_value("WindowMode", get_window().mode)
-			resolution_index = 5
-func _on_fullscreen_decrease():
-	var label : Label = settings_container.get_child(0)
+
+func _on_fullscreen_decrease(child : Label):
 	match get_window().mode:
 		Window.MODE_EXCLUSIVE_FULLSCREEN:
 			get_window().mode = Window.MODE_WINDOWED
-			resolution_index = GConfig.RESOLUTIONS.find(windowed_res_ref)
-			label.text = "SCREEN MODE: WINDOWED"
+			child.text = "SCREEN MODE: WINDOWED"
 			enable_label(settings.get_child(1))
 			get_window().borderless = true
 			await get_tree().create_timer(0.05).timeout
 			get_window().borderless = false
 			await get_tree().create_timer(0.05).timeout
 			get_window().size = windowed_res_ref
-			enable_label(settings.get_child(1), "RESOLUTION: " + str(GConfig.RESOLUTIONS[resolution_index]).trim_prefix("{").trim_suffix("}"))
+			enable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
 			GameConfiguration.set_value("Resolution", get_window().size)
 			GameConfiguration.set_value("Borderless", get_window().borderless)
 			GameConfiguration.set_value("WindowMode", get_window().mode)
@@ -178,6 +165,7 @@ func disable_label(label : Label, state : String = ""):
 	if state != "":
 		label.text = state
 	pass
+
 func enable_label(label : Label, state : String = ""):
 	label.set("theme_override_colors/font_color", Color(1.0, 1.0, 1.0, 1.0))
 	label.set_meta("Enabled", true)
@@ -186,15 +174,11 @@ func enable_label(label : Label, state : String = ""):
 	pass
 
 func reset_configuration():
-	resolution_index = 3
 	get_window().borderless = false
 	get_window().mode = Window.MODE_WINDOWED
 	enable_label(settings.get_child(0), "SCREEN MODE: WINDOWED")
-	get_window().size = Vector2i(GConfig.WINDOW_WIDTH_SIZE_1 * (resolution_index+1), GConfig.WINDOW_HEIGHT_SIZE_1 * (resolution_index+1))
-	enable_label(settings.get_child(1), "RESOLUTION: " + str(GConfig.RESOLUTIONS[resolution_index]).trim_prefix("{").trim_suffix("}"))
+	get_window().size = Vector2i(1280, 720)
+	enable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
 	GameConfiguration.set_value("Resolution", get_window().size)
 	GameConfiguration.set_value("Borderless", get_window().borderless)
 	GameConfiguration.set_value("WindowMode", get_window().mode)
-
-	
-	pass
