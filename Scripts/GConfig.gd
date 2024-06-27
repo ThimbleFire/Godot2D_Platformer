@@ -15,17 +15,23 @@ const CONFIGURATION_PATH : String = "user://configuration.cfg"
 
 func increase_resolution():
 	var i : int = RESOLUTIONS.find(get_window().size)
-	if i + 1 < RESOLUTIONS.size - 1:
-		get_window().size = RESOLUTIONS(i + 1)
+	if i + 1 < RESOLUTIONS.size():
+		get_window().size = RESOLUTIONS[i + 1]
+	set_value("Resolution", get_window().size)
 
 func decrease_resolution():
 	var i : int = RESOLUTIONS.find(get_window().size)
 	if i > 0:
 		get_window().borderless = false
-		get_window().size = RESOLUTIONS(i - 1)
+		get_window().size = RESOLUTIONS[i - 1]
+	set_value("Resolution", get_window().size)
+		
+func set_resolution(resolution):
+	get_window().size = resolution
+	set_value("Resolution", get_window().size)
 
 var current_resolution_str:
-	get: return str(get_window().size).trim_prefix("{").trim_suffix("}")
+	get: return str(get_window().size).trim_prefix("(").trim_suffix(")")
 
 var config : ConfigFile
 

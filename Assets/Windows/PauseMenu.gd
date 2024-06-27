@@ -11,7 +11,7 @@ var active_page : Page = Page.MAIN
 
 var menu_index = 0
 var settings_index = 0
-var windowed_res_ref = Vector2i(1920,1080)
+var windowed_res_ref = Vector2i(1280, 720)
 
 func _ready():
 	get_tree().paused = true
@@ -27,10 +27,10 @@ func _ready():
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("Escape"):
-		if get_tree().paused == true and !animation_player.is_playing():
-			if main.visible == true:
-				close()
-			elif settings.visible == true:
+		if get_tree().paused and !animation_player.is_playing():
+			if main.visible:
+				close_main()
+			elif settings.visible:
 				close_settings()
 				
 	match active_page:
@@ -119,15 +119,12 @@ func _on_resolution_increase(child : Label):
 	if enabled:
 		GameConfiguration.increase_resolution()
 		child.text = "RESOLUTION: " + GameConfiguration.current_resolution_str
-		GameConfiguration.set_value("Resolution", get_window().size)
-
 func _on_resolution_decrease(child : Label):
 	var enabled : bool = settings_container.get_child(0).get_meta("Enabled")
 	if enabled:
 		await get_tree().create_timer(0.05).timeout
 		GameConfiguration.decrease_resolution()
 		child.text = "RESOLUTION: " + GameConfiguration.current_resolution_str
-		GameConfiguration.set_value("Resolution", get_window().size)
 		GameConfiguration.set_value("Borderless", get_window().borderless)
 
 func _on_fullscreen_increase(child : Label):
@@ -137,25 +134,20 @@ func _on_fullscreen_increase(child : Label):
 			get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 			child.text = "SCREEN MODE: FULLSCREEN"
 			get_window().borderless = true
-			disable_label(settings.get_child(1), "RESOLUTION: 1920 x 1080")
-			await get_tree().create_timer(0.05).timeout
+			disable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
 			GameConfiguration.set_value("Resolution", get_window().size)
 			GameConfiguration.set_value("Borderless", get_window().borderless)
 			GameConfiguration.set_value("WindowMode", get_window().mode)
-
 func _on_fullscreen_decrease(child : Label):
 	match get_window().mode:
 		Window.MODE_EXCLUSIVE_FULLSCREEN:
 			get_window().mode = Window.MODE_WINDOWED
 			child.text = "SCREEN MODE: WINDOWED"
 			enable_label(settings.get_child(1))
-			get_window().borderless = true
-			await get_tree().create_timer(0.05).timeout
 			get_window().borderless = false
 			await get_tree().create_timer(0.05).timeout
-			get_window().size = windowed_res_ref
+			GameConfiguration.set_resolution(windowed_res_ref)
 			enable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
-			GameConfiguration.set_value("Resolution", get_window().size)
 			GameConfiguration.set_value("Borderless", get_window().borderless)
 			GameConfiguration.set_value("WindowMode", get_window().mode)
 	
@@ -165,7 +157,6 @@ func disable_label(label : Label, state : String = ""):
 	if state != "":
 		label.text = state
 	pass
-
 func enable_label(label : Label, state : String = ""):
 	label.set("theme_override_colors/font_color", Color(1.0, 1.0, 1.0, 1.0))
 	label.set_meta("Enabled", true)
@@ -177,8 +168,7 @@ func reset_configuration():
 	get_window().borderless = false
 	get_window().mode = Window.MODE_WINDOWED
 	enable_label(settings.get_child(0), "SCREEN MODE: WINDOWED")
-	get_window().size = Vector2i(1280, 720)
+	GameConfiguration.set_resolution(Vector2i(1280, 720))
 	enable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
-	GameConfiguration.set_value("Resolution", get_window().size)
 	GameConfiguration.set_value("Borderless", get_window().borderless)
 	GameConfiguration.set_value("WindowMode", get_window().mode)
