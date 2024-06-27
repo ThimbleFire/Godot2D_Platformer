@@ -72,6 +72,9 @@ func close_main():
 	get_tree().paused = false
 	self.queue_free()
 
+func quit():
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+
 func handle_settings():
 	var child = settings_container.get_child(0)
 	if Input.is_action_just_pressed("Down"):
@@ -110,9 +113,6 @@ func close_settings():
 	active_page = Page.MAIN
 	main.visible = true
 	settings.visible = false
-
-func quit():
-	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	
 func _on_resolution_increase(child : Label):
 	var enabled : bool = settings_container.get_child(0).get_meta("Enabled")
