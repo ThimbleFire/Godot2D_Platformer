@@ -17,6 +17,10 @@ func _ready():
 	get_tree().paused = true
 	animation_player.play("menu_foreground_blur")
 	var label : Label = settings_container.get_child(0)
+	if OS.has_feature("web"):
+		disable_label(label, "SCREEN MODE: FULLSCREEN")
+		disable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
+		return
 	match GameConfiguration.get_value("WindowMode"):
 		Window.MODE_EXCLUSIVE_FULLSCREEN:
 			enable_label(label, "SCREEN MODE: FULLSCREEN") 
