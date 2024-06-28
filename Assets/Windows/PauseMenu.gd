@@ -17,10 +17,12 @@ func _ready():
 	get_tree().paused = true
 	animation_player.play("menu_foreground_blur")
 	var label : Label = settings_container.get_child(0)
+	# Browser build cannot change resolution or become full screen.
 	if OS.has_feature("web"):
 		disable_label(label, "SCREEN MODE: FULLSCREEN")
 		disable_label(settings.get_child(1), "RESOLUTION: " + GameConfiguration.current_resolution_str)
 		return
+	# Set the labels starting text and state.
 	match GameConfiguration.get_value("WindowMode"):
 		Window.MODE_EXCLUSIVE_FULLSCREEN:
 			enable_label(label, "SCREEN MODE: FULLSCREEN") 
@@ -38,24 +40,29 @@ func _process(_delta):
 				close_settings()
 				
 	match active_page:
-		0:
-			handle_main()
-		1:
-			handle_settings()
+		0: handle_main()
+		1: handle_settings()
 
 func handle_main():
 	var child = main_container.get_child(0)
 	if Input.is_action_just_pressed("Down"):
 		if menu_index < main.get_child_count() - 1:
+			# remove the label currently in the container to the bottom of `main_container`
 			child.reparent(main)
+			# move the childs position so its above the container
 			main.move_child(child, menu_index)
+			# moving the child above `main_container`, essentially pushing `main_container` down in the hirarchy
 			menu_index += 1
+			# get the label that is below the container
 			var child2 = main.get_child(menu_index + 1)
+			# put said child in the container
 			child2.reparent(main_container)
 			
 	if Input.is_action_just_pressed("Up"):
 		if menu_index > 0:
+			# remove the label currently in the container to the bottom of settings
 			child.reparent(main)
+			# move the childs position underneath the container
 			main.move_child(child, main_container.get_index() + 1)
 			menu_index -= 1
 			var child2 = main.get_child(menu_index)
@@ -113,7 +120,9 @@ func handle_settings():
 			1: _on_resolution_decrease(child)
 
 func close_settings():
-	GameConfiguration.gcsave()
+	# don't save settings on the web browser copy of the game
+	if !OS.has_feature("web"):
+		GameConfiguration.gcsave()
 	active_page = Page.MAIN
 	main.visible = true
 	settings.visible = false
